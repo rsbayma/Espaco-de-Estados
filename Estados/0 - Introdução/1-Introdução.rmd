@@ -1,0 +1,57 @@
+---
+title: "Introdução à representação de espaço de estados"
+output: 
+  html_document:
+    code_folding: show
+    theme:
+      primary: "#EA80FC"
+      secondary: "#00DAC6"
+      base_font:
+        google: Prompt
+      heading_font:
+        google: Proza Libre
+---
+
+```{r setup, include=FALSE}
+if (requireNamespace("thematic"))
+  thematic::thematic_rmd(font = "auto")
+```
+
+A representação de estados é um tipo de *modelagem de sistema* dinâmico **no domínio do tempo** que usamos para análise e projeto em Engenharia de Controle Automático.
+
+A principal característica desse tipo de modelagem é que o sistema fica descrito por um **conjunto de equações diferenciais de 1a ordem**, ao invés de uma única equação diferencial de ordem elevada.
+
+Para sistemas LIT (*Lineares Invariantes no Tempo*), o conjunto de equações é linear e podemos usar **matrizes** para auxiliar na representação do sistema. Isso traz uma série de comodidades para trabalhar, porém requer que lembrar de alguns conceitos da Álgebra Linear.
+
+## Exemplo ilustrativo
+
+$$
+\begin{align}
+  \frac{Y(s)}{U(s)} = \frac{10s+7}{s^2+4s+22}
+    \Leftrightarrow  \left\{\begin{array}{l}
+  \dot{x}_1 = -4x_1-22x_2+u\\
+  \dot{x}_2 = x_1\\
+  y = 10x_1+ 7x_2 \end{array}\right.
+\end{align}
+$$
+
+O conjunto de equações à direita pode ser escrito também:
+$$
+\begin{align}
+  \dot{\mathbf{x}} &= \left[\begin{array}{rr}-4 & -22\\ 1 & 0 \end{array}\right]\mathbf{x}+
+  \left[\begin{array}{r}1\\ 0 \end{array}\right]u\\
+  y &= \left[\begin{array}{rr}10 & 7\end{array}\right]\mathbf{x}
+\end{align}
+$$
+
+$\mathbf{x}$ é um vetor coluna contendo os sinais $x_1(t)$ e $x_2(t)$, isto é $\mathbf{x}=\left[\begin{array}{cc}
+x_1 & x_2\end{array}\right]^T$. Na maioria das vezes omitimos a dependência de $t$.
+
+Neste caso o sistema é representado pelas matrizes:
+$$
+\begin{align}
+  \mathbf{A} &= \left[\begin{array}{rr}-4 & -22\\ 1 & 0 \end{array}\right]\\
+  \mathbf{B} &= \left[\begin{array}{r}1\\ 0 \end{array}\right]\\
+  \mathbf{C} &= \left[\begin{array}{rr}10 & 7\end{array}\right]
+\end{align}
+$$
