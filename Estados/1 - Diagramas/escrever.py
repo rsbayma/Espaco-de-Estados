@@ -1,3 +1,4 @@
+import numpy as np
 #
 def dispmat(A):
     cols = ''.join(['r']*A.shape[1])
@@ -6,9 +7,9 @@ def dispmat(A):
     for i in range(m):
       for j in range(n):
         if j<n-1:
-          str = str + '{:.3}'.format(A[i,j]) + '&'
+          str += '{}'.format(A[i,j]) + '&'
         else:
-          str = str + '{:.3}'.format(A[i,j]) + r'\\'
+          str += '{}'.format(A[i,j]) + r'\\'
     return str + r'\end{array}\right]'
 
 
